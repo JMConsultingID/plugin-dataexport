@@ -30,8 +30,9 @@ class Plugin_Dataexport_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
+        // Tambahkan hook ke 'admin_init' untuk memeriksa saat plugin Anda diaktifkan
         add_action( 'admin_init', array( 'Plugin_Dataexport_Activator', 'check_github_updater_active' ) );
-	}
+    }
 
     // Fungsi untuk memeriksa apakah GitHub Updater diaktifkan
     public static function check_github_updater_active() {
@@ -40,7 +41,7 @@ class Plugin_Dataexport_Activator {
             // Tampilkan pemberitahuan di dasbor
             add_action( 'admin_notices', array( 'Plugin_Dataexport_Activator', 'show_github_updater_notice' ) );
             // Nonaktifkan plugin Anda
-            deactivate_plugins( plugin_basename( __FILE__ ) );
+            deactivate_plugins( plugin_basename( dirname( __DIR__ ) . '../plugin-dataexport.php' ) );
         }
     }
 
@@ -48,9 +49,8 @@ class Plugin_Dataexport_Activator {
     public static function show_github_updater_notice() {
         ?>
         <div class="notice notice-error">
-            <p><?php _e( 'Your plugin requires GitHub Updater to be enabled. Please install and enable GitHub Updater first.', 'plugin-dataexport' ); ?></p>
+            <p><?php _e( 'Plugin Dataexport memerlukan GitHub Updater untuk diaktifkan. Silakan instal dan aktifkan GitHub Updater terlebih dahulu.', 'plugin-dataexport' ); ?></p>
         </div>
         <?php
     }
-
 }
