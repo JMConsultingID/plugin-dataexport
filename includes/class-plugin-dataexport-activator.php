@@ -22,28 +22,32 @@
  */
 class Plugin_Dataexport_Activator {
 
+	/**
+	 * Short Description. (use period)
+	 *
+	 * Long Description.
+	 *
+	 * @since    1.0.0
+	 */
+
     public static function activate() {
+        // Cek langsung apakah GitHub Updater aktif
         if ( ! is_plugin_active( 'git-updater/git-updater.php' ) ) {
-            // Set transien untuk pemberitahuan
-            set_transient( 'plugin_dataexport_github_updater_notice', true, 5 );
+            // Tampilkan pemberitahuan di dasbor
+            add_action( 'admin_notices', array( 'Plugin_Dataexport_Activator', 'show_github_updater_notice' ) );
             // Nonaktifkan plugin Anda
             deactivate_plugins( plugin_basename( dirname( __DIR__ ) . '/plugin-dataexport.php' ) );
+            // Hentikan proses aktivasi
+            wp_die( __( 'The Dataexport plugin requires GitHub Updater to be enabled. Please install and enable GitHub Updater', 'plugin-dataexport' ) );
         }
     }
-}
 
-// Tambahkan pemberitahuan jika transien diatur
-add_action( 'admin_notices', 'plugin_dataexport_admin_notices' );
-
-function plugin_dataexport_admin_notices() {
-    // Cek transien
-    if ( get_transient( 'plugin_dataexport_github_updater_notice' ) ) {
+    // Fungsi untuk menampilkan pemberitahuan
+    public static function show_github_updater_notice() {
         ?>
         <div class="notice notice-error">
-            <p><?php _e( 'The Dataexport plugin requires GitHub Updater to be enabled. Please install and enable GitHub Up', 'plugin-dataexport.', 'plugin-dataexport' ); ?></p>
+            <p><?php _e( 'The Dataexport plugin requires GitHub Updater to be enabled. Please install and enable GitHub Updater.', 'plugin-dataexport' ); ?></p>
         </div>
         <?php
-        // Hapus transien setelah pemberitahuan ditampilkan
-        delete_transient( 'plugin_dataexport_github_updater_notice' );
     }
 }
