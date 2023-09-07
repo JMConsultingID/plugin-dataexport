@@ -23,6 +23,8 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       plugin-dataexport
  * Domain Path:       /languages
+ * GitHub Plugin URI: https://github.com/JMConsultingID/plugin-dataexport
+ * GitHub Branch:     main
  */
 
 // If this file is called directly, abort.
