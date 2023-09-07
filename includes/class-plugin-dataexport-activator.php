@@ -37,8 +37,6 @@ class Plugin_Dataexport_Activator {
             add_action( 'admin_notices', array( 'Plugin_Dataexport_Activator', 'show_github_updater_notice' ) );
             // Nonaktifkan plugin Anda
             deactivate_plugins( plugin_basename( dirname( __DIR__ ) . '/plugin-dataexport.php' ) );
-            // Hentikan proses aktivasi
-            wp_die( __( 'Plugin Dataexport memerlukan GitHub Updater untuk diaktifkan. Silakan instal dan aktifkan GitHub Updater terlebih dahulu.', 'plugin-dataexport' ) );
         }
     }
 
@@ -46,7 +44,7 @@ class Plugin_Dataexport_Activator {
     public static function show_github_updater_notice() {
         ?>
         <div class="notice notice-error">
-            <p><?php _e( 'Plugin Dataexport memerlukan GitHub Updater untuk diaktifkan. Silakan instal dan aktifkan GitHub Updater terlebih dahulu.', 'plugin-dataexport' ); ?></p>
+            <p><?php _e( 'The Dataexport plugin requires GitHub Updater to be enabled. Please install and enable GitHub Up', 'plugin-dataexport' ); ?></p>
         </div>
         <?php
     }
