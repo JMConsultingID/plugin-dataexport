@@ -37,7 +37,7 @@ class Plugin_Dataexport_Activator {
     // Fungsi untuk memeriksa apakah GitHub Updater diaktifkan
     public static function check_github_updater_active() {
         // Cek apakah GitHub Updater aktif
-        if ( ! is_plugin_active( 'github-updater/github-updater.php' ) ) {
+        if ( ! is_plugin_active( 'git-updater/git-updater.php' ) ) {
             // Tampilkan pemberitahuan di dasbor
             add_action( 'admin_notices', array( 'Plugin_Dataexport_Activator', 'show_github_updater_notice' ) );
             // Nonaktifkan plugin Anda
