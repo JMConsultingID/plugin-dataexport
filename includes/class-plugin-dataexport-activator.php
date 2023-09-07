@@ -29,19 +29,16 @@ class Plugin_Dataexport_Activator {
 	 *
 	 * @since    1.0.0
 	 */
-	public static function activate() {
-        // Tambahkan hook ke 'admin_init' untuk memeriksa saat plugin Anda diaktifkan
-        add_action( 'admin_init', array( 'Plugin_Dataexport_Activator', 'check_github_updater_active' ) );
-    }
 
-    // Fungsi untuk memeriksa apakah GitHub Updater diaktifkan
-    public static function check_github_updater_active() {
-        // Cek apakah GitHub Updater aktif
+    public static function activate() {
+        // Cek langsung apakah GitHub Updater aktif
         if ( ! is_plugin_active( 'git-updater/git-updater.php' ) ) {
             // Tampilkan pemberitahuan di dasbor
             add_action( 'admin_notices', array( 'Plugin_Dataexport_Activator', 'show_github_updater_notice' ) );
             // Nonaktifkan plugin Anda
-            deactivate_plugins( plugin_basename( dirname( __DIR__ ) . '../plugin-dataexport.php' ) );
+            deactivate_plugins( plugin_basename( dirname( __DIR__ ) . '/plugin-dataexport.php' ) );
+            // Hentikan proses aktivasi
+            wp_die( __( 'Plugin Dataexport memerlukan GitHub Updater untuk diaktifkan. Silakan instal dan aktifkan GitHub Updater terlebih dahulu.', 'plugin-dataexport' ) );
         }
     }
 
